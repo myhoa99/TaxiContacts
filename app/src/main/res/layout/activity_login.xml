@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="vn.icar.contacts.LoginActivity">
+ <TextView
+     android:layout_width="wrap_content"
+     android:text="Đăng Nhập"
+     android:textColor="@color/black"
+     android:textSize="40sp"
+     android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="240sp"
+            android:layout_height="wrap_content"
+            android:text="Tên đăng nhập"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="2dp">
+
+
+            <EditText
+                android:id="@+id/edt_username"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:inputType="text"
+                android:text="936353060"
+                android:paddingLeft="20dp"
+                android:background="@drawable/bg_input"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="240sp"
+            android:layout_height="wrap_content"
+            android:text="Mật Khẩu"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="2dp">
+
+
+            <EditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="19dp"
+                android:inputType="textPassword"
+                android:paddingLeft="20dp"
+                android:text="123456"
+                android:background="@drawable/bg_input"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_marginTop="30dp"
+        android:layout_width="150dp"
+        android:background="@drawable/bg_input"
+        android:textColor="@color/black"
+        android:text="Đăng nhập"
+        android:layout_height="50dp">
+
+    </Button>
+    <TextView
+        android:id="@+id/tv_forgetpass"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:text="Quên mật khẩu?"
+        android:textStyle="italic"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="100dp"
+        android:textSize="14sp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_signin"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:text="Nếu không có tài khoản vui lòng ĐĂNG KÍ?"
+        android:layout_marginTop="100dp"
+        android:textSize="15sp"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

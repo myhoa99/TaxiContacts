@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/bg_input.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_add_contact.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_backspace.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_call_black_24dp.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_call_dialog.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_chat_dialog.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_check.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_close.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_company.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_down_arrow.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_edit_black_24dp.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_fab_add.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_fiber.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_fingerprint.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_info_dialog.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_launcher_background.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_location.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_mail.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_message.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_nav.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_notifications_black_24dp.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_oval.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_overflow.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_person_outline_black_24dp.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_phone.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_scan.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_search.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_share.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_stars.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_voice.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ripple.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ripple_effect.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/tab_color_selector.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.TaxiConTacts" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionOverflowButtonStyle">@style/CustomOverflowButton</item>
+
+    </style>
+    //Custom OverflowButton
+    <style name="CustomOverflowButton" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:src">@drawable/ic_overflow</item>
+        <item name="android:paddingRight">15dp</item>
+
+    </style>
+</resources>

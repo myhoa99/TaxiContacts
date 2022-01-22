@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Share danh bạ"
+        android:id="@+id/item_share" />
+    <item
+        android:title="Đặt nhạc chuông"
+        android:id="@+id/item_setRingtone"/>
+    <item
+        android:title="Trợ giúp và phản hồi"
+        android:id="@+id/item_send_support"/>
+    <item
+        android:title="Về chúng tôi"
+        android:id="@+id/item_about"/>
+    <!--<item-->
+        <!--android:iconTint="#B3B3B3"-->
+        <!--android:id="@+id/search_voice_btn"-->
+        <!--android:title=""-->
+        <!--android:icon="@drawable/ic_voice"-->
+        <!--app:showAsAction="always" />-->
+</menu>
