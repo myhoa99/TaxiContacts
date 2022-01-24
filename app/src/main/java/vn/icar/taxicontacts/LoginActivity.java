@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity( new Intent(vn.icar.taxicontacts.LoginActivity.this,MainActivity.class));
 
                     }
-                }, 100);
+                }, 50);
            }
            @Override
            public void onFailure(Call<LoginResponse> call, Throwable t) {
