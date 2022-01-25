@@ -159,7 +159,7 @@ public class RecyclerViewAdapterContact extends RecyclerView.Adapter<vn.icar.tax
         viewHolder.btn_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGoogleMap(mContext,20.99337528006226, 105.78797768673181,"Công ty Hoa");
+
 
 
             }

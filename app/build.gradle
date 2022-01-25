@@ -47,6 +47,8 @@ dependencies {
     //room database
     implementation "androidx.room:room-runtime:2.4.1"
     annotationProcessor "androidx.room:room-compiler:2.4.1"
+    //jsoup
+    implementation'org.jsoup:jsoup:1.7.3'
 
 
 }
