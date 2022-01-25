@@ -27,19 +27,18 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // ánh xạ
-        username= findViewById(R.id.edt_username);
-        password= findViewById(R.id.edt_password);
-        btnlogin= findViewById(R.id.btn_login);
-        tvforgetpass= findViewById(R.id.tv_forgetpass);
-        tvsignin= findViewById(R.id.tv_signin);
+        username = findViewById(R.id.edt_username);
+        password = findViewById(R.id.edt_password);
+        btnlogin = findViewById(R.id.btn_login);
+        tvforgetpass = findViewById(R.id.tv_forgetpass);
+        tvsignin = findViewById(R.id.tv_signin);
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(username.getText().toString())||TextUtils.isEmpty(password.getText().toString())){
+                if (TextUtils.isEmpty(username.getText().toString()) || TextUtils.isEmpty(password.getText().toString())) {
                     Toast.makeText(vn.icar.taxicontacts.LoginActivity.this, "Username/password required", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                   login();
+                } else {
+                    login();
                 }
             }
         });
@@ -52,35 +51,37 @@ public class LoginActivity extends AppCompatActivity {
         tvsignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent= new Intent(vn.icar.taxicontacts.LoginActivity.this, RegisterActivity.class);
-               startActivity(intent);
+                Intent intent = new Intent(vn.icar.taxicontacts.LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
 
             }
         });
 
 
     }
-    public void  login(){
+
+    public void login() {
         UserService client = ApiClient.getUserService();
-       Call<LoginResponse> loginReponseCall= client.userLogin(username.getText().toString(), password.getText().toString());
-       loginReponseCall.enqueue(new Callback<LoginResponse>() {
-           @Override
-           public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-               Toast.makeText(vn.icar.taxicontacts.LoginActivity.this, "Login Successful: " , Toast.LENGTH_SHORT).show();
+        Call<LoginResponse> loginReponseCall = client.userLogin(username.getText().toString(), password.getText().toString());
+        loginReponseCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                Toast.makeText(vn.icar.taxicontacts.LoginActivity.this, "Login Successful: ", Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity( new Intent(vn.icar.taxicontacts.LoginActivity.this,MainActivity.class));
+                        startActivity(new Intent(vn.icar.taxicontacts.LoginActivity.this, MainActivity.class));
 
                     }
-                }, 50);
-           }
-           @Override
-           public void onFailure(Call<LoginResponse> call, Throwable t) {
-               Toast.makeText(vn.icar.taxicontacts.LoginActivity.this, "Login Fail", Toast.LENGTH_SHORT).show();
+                }, 0);
+            }
 
-           }
-       });
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Toast.makeText(vn.icar.taxicontacts.LoginActivity.this, "Login Fail", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
     }

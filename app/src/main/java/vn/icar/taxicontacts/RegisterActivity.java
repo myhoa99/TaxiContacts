@@ -54,27 +54,26 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register() {
-
         UserService client = ApiClient.getUserService();
-        Call<LoginResponse> loginReponseCall= client.register(_id.getText().toString(), name.getText().toString(), password.getText().toString());
-        loginReponseCall.enqueue(new Callback<LoginResponse>() {
+        Call<RegisterResponse> registerReponseCall= client.register(_id.getText().toString(), name.getText().toString(), password.getText().toString());
+        registerReponseCall.enqueue(new Callback<RegisterResponse>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                Toast.makeText(vn.icar.taxicontacts.RegisterActivity
-                        .this, "Register Successful: " , Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                Toast.makeText(vn.icar.taxicontacts.RegisterActivity.this, "Register Successful: " , Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity( new Intent(vn.icar.taxicontacts.RegisterActivity.this,MainActivity.class));
+                        startActivity( new Intent(vn.icar.taxicontacts.RegisterActivity.this,LoginActivity.class));
 
                     }
-                }, 50);
+                }, 0);
             }
-            @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(vn.icar.taxicontacts.RegisterActivity.this, "Register Fail", Toast.LENGTH_SHORT).show();
 
+            @Override
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                Toast.makeText(vn.icar.taxicontacts.RegisterActivity.this, "Register Fail", Toast.LENGTH_SHORT).show();
             }
+
         });
 
 

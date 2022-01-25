@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundFragment"
+    android:background="@color/white"
     android:orientation="vertical"
     android:paddingBottom="5dp"
     android:paddingLeft="5dp"
@@ -17,7 +17,7 @@
         android:layout_gravity="center">
         <TextView
             android:layout_marginTop="10dp"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:gravity="center"
             android:textSize="20sp"
             android:text="Không có danh bạ nào được tìm thấy"

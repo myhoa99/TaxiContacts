@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ContactDetailActivity extends AppCompatActivity {
     private ImageView btnEdit, btnBack, ic_ringtone, btnExport, img_qrcode;
-    private LinearLayout linearLayoutCall, linearLayoutMsg, linearLayoutMail;
+    private LinearLayout linearLayoutCall, linearLayoutMsg, linearLayoutMail,linearaddress;
     private TextView detail_mobile, detail_personal_email, detail_address;
     String message, id, name, phone, email, address, textQR;
     Dialog dialog_share;
@@ -162,6 +162,7 @@ public class ContactDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
         btnExport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

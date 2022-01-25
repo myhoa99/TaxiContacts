@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class NewContactActivity extends AppCompatActivity {
     private TextInputLayout edtName, edtPhone, edtEmail, edtAddress;
-    private ImageButton btnBack;
+    private ImageButton btnBack,btnaddress;
     private TextView tvAdd, tvToolbarTitle;
     //    private CircleImageView ic_create_img;
     String id, Name, Phone, Email, Address, message;
@@ -79,6 +79,13 @@ public class NewContactActivity extends AppCompatActivity {
             public void onClick(View v) {
                 onBackPressed();
                 finish();
+            }
+        });
+        btnaddress=findViewById(R.id.btn_address);
+        btnaddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         tvAdd.setOnClickListener(new View.OnClickListener() {
@@ -228,4 +235,20 @@ public class NewContactActivity extends AppCompatActivity {
             }
         });
     }
+//    public void addnewitem(){
+//        List<Integer> integerList = new ArrayList<>();
+//        List<PushContacts.Address> addressList = new ArrayList<>();
+//        addressList.add(new PushContacts.Address()
+//                .setCoords(new PushContacts.Coords())
+//                .setAddressChild(new PushContacts.AddressChild()));
+//
+//        new PushContacts()
+//                .setPhone(12131211)
+//                .setName("My Hoa")
+//                .setAdditionalPhone(integerList);
+//        UserService client = ApiClient.getUserService();
+//        Call<PushContacts> pushContactsCall= client.getAllData()
+//
+//
+//        }
 }

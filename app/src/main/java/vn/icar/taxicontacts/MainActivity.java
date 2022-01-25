@@ -12,9 +12,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.speech.RecognizerIntent;
-import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,9 +27,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
-import vn.icar.taxicontacts.adapter.ViewPagerAdapter;
-import vn.icar.taxicontacts.fragment.CallFragment;
-import vn.icar.taxicontacts.fragment.ContactFragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -46,13 +43,16 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import vn.icar.taxicontacts.adapter.ViewPagerAdapter;
+import vn.icar.taxicontacts.fragment.CallFragment;
+import vn.icar.taxicontacts.fragment.ContactFragment;
+
 public class MainActivity extends AppCompatActivity {
-    public static final int REQUEST_CODE_SPEECH_INPUT=1000;
+    public static final int REQUEST_CODE_SPEECH_INPUT = 1000;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
     private Toolbar toolbar;
-
     private TextView tvSearch;
     ImageView img_voice_search, ic_scanqr, img_qrcode;
     private FloatingActionButton fab;
@@ -60,17 +60,20 @@ public class MainActivity extends AppCompatActivity {
     private Dialog dialog_share;
 
     Uri ringtone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //anh xa
-        tabLayout = (TabLayout) findViewById(R.id.tablayout_id);
-        viewPager = (ViewPager) findViewById(R.id.viewpager_id);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        fab =(FloatingActionButton)findViewById(R.id.fab);
-        img_voice_search = (ImageView) toolbar.findViewById(R.id.ic_voice);
-        ic_scanqr = (ImageView) toolbar.findViewById(R.id.ic_scanqr);
+        tabLayout = findViewById(R.id.tablayout_id);
+        viewPager = findViewById(R.id.viewpager_id);
+        toolbar = findViewById(R.id.toolbar);
+        fab = findViewById(R.id.fab);
+        img_voice_search = toolbar.findViewById(R.id.ic_voice);
+        ic_scanqr = toolbar.findViewById(R.id.ic_scanqr);
+
 
         //Dialog
         dialog_share = new Dialog(MainActivity.this);
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false); //Remove Title of Toolbar
 
         // Fragment
-        adapter.addFragment(new CallFragment(),"GẦN ĐÂY");
+        adapter.addFragment(new CallFragment(), "GẦN ĐÂY");
         adapter.addFragment(new ContactFragment(), "DANH BẠ");
         viewPager.setAdapter(adapter);
 
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setTabTextColors(getResources().getColor(R.color.colorHintTextLight), getResources().getColor(R.color.colorTextLight));
 
         // click btn
-        tvSearch = (TextView)findViewById(R.id.btn_Search);
+        tvSearch = (TextView) findViewById(R.id.btn_Search);
         tvSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, NewContactActivity.class);
-                intent.putExtra("MESSAGE","ADD_CONTACT");
+                Intent intent = new Intent(MainActivity.this, NewContactActivity.class);
+                intent.putExtra("MESSAGE", "ADD_CONTACT");
                 startActivity(intent);
             }
         });
@@ -129,16 +132,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                integrator.setPrompt("Scan danh bạ");
                 integrator.setCameraId(0);
                 integrator.setBeepEnabled(false);
                 integrator.setBarcodeImageEnabled(false);
                 integrator.initiateScan();
+                integrator.setPrompt("Scan danh bạ");
             }
         });
     }
 
-    public void speak(){
+
+    public void speak() {
         Intent mIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         mIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL
                 , RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -146,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         mIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Mời bạn nói tên danh bạ");
         try {
             startActivityForResult(mIntent, REQUEST_CODE_SPEECH_INPUT);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             Toast.makeText(this, "" + ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -155,24 +159,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult resultScan = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(resultScan != null){
-            if(resultScan.getContents()==null){
+        if (resultScan != null) {
+            if (resultScan.getContents() == null) {
                 Toast.makeText(this, "Đóng trình scan QRCode", Toast.LENGTH_LONG).show();
-            }
-            else {
+            } else {
 //                Toast.makeText(this, resultScan.getContents(),Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, NewContactActivity.class);
                 intent.putExtra("MESSAGE", "ADD_CONTACT_QRCODE");
-                intent.putExtra("DATA_QRCODE",resultScan.getContents());
+                intent.putExtra("DATA_QRCODE", resultScan.getContents());
                 startActivity(intent);
             }
-        }else {
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
 
-        switch (requestCode){
-            case REQUEST_CODE_SPEECH_INPUT:{
-                if(resultCode == RESULT_OK && null != data){
+        switch (requestCode) {
+            case REQUEST_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                     intent.putExtra("DATA_SEARCH", result.get(0));
@@ -180,14 +183,14 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             }
-            case 24:{
+            case 24: {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (Settings.System.canWrite(MainActivity.this)) {
                         ringtone = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
                         RingtoneManager.setActualDefaultRingtoneUri(MainActivity.this
                                 , RingtoneManager.TYPE_RINGTONE, ringtone);
                         Toast.makeText(MainActivity.this, "Đặt nhạc chuông cho máy thành công", Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -206,36 +209,35 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.item_share:
-                TelephonyManager tMgr = (TelephonyManager)getApplicationContext().getSystemService(MainActivity.TELEPHONY_SERVICE);
+                TelephonyManager tMgr = (TelephonyManager) getApplicationContext().getSystemService(MainActivity.TELEPHONY_SERVICE);
                 String mPhoneNumber = "";
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
                         == PackageManager.PERMISSION_GRANTED) {
                     mPhoneNumber = "0" + tMgr.getLine1Number().substring(3);
                 }
-                String textQR="Myhoa,"+mPhoneNumber+",myhoa99@gmail.com,224 Trieu Khuc";
+                String textQR = "Myhoa," + mPhoneNumber + ",myhoa99@gmail.com,224 Trieu Khuc";
                 textQR.trim();
                 MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-                try{
-                    BitMatrix bitMatrix = multiFormatWriter.encode(textQR, BarcodeFormat.QR_CODE,390,390);
+                try {
+                    BitMatrix bitMatrix = multiFormatWriter.encode(textQR, BarcodeFormat.QR_CODE, 390, 390);
                     BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
                     Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
                     img_qrcode.setImageBitmap(bitmap);
                     dialog_share.show();
-                }
-                catch (WriterException e){
+                } catch (WriterException e) {
                     e.printStackTrace();
                 }
                 return true;
             case R.id.item_setRingtone:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (Settings.System.canWrite(MainActivity.this)) {
-                        Intent intent=new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+                        Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
                         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, ringtone);
                         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI, ringtone);
-                        startActivityForResult(intent , 24);
-                    }else {
+                        startActivityForResult(intent, 24);
+                    } else {
                         Toast.makeText(MainActivity.this, "Vui lòng cấp quyền để đặt nhạc chuông"
                                 , Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
@@ -251,9 +253,9 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"myhoa99@gmail.com"});
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Trợ giúp và phản hồi Contact App");
                 intent.putExtra(Intent.EXTRA_TEXT, "");
-                try{
+                try {
                     startActivity(intent.createChooser(intent, "Chọn App Email bạn sử dụng"));
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     Toast.makeText(MainActivity.this, "Lỗi" + ex, Toast.LENGTH_SHORT).show();
                 }
                 return true;

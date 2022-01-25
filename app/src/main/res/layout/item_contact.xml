@@ -11,7 +11,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp">
         <TextView
-            android:textColor="#BEBEBE"
+            android:textColor="#000000"
             android:id="@+id/pst_tv"
             android:textSize="20dp"
             android:text="A"
@@ -22,7 +22,7 @@
             android:id="@+id/divider_horinzontal"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#FFFFFF" />
+            android:background="#000000" />
     </LinearLayout>
 
     <LinearLayout
@@ -44,7 +44,7 @@
                 android:id="@+id/img_contact"/>
             <TextView
                 android:id="@+id/tvFname"
-                android:textColor="#706C6B"
+                android:textColor="#000"
                 android:textSize="25sp"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -58,21 +58,33 @@
         </FrameLayout>
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content">
             <TextView
                 android:gravity="center_vertical"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="20dp"
                 android:textSize="19sp"
                 android:layout_marginTop="14dp"
                 android:layout_weight="10"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="contact_name"
                 android:id="@+id/tvName"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:inputType="text"
                 ></TextView>
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btn_address"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_location"
+            android:paddingHorizontal="10dp"/>
     </LinearLayout>
 </LinearLayout>

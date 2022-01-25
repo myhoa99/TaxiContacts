@@ -31,13 +31,27 @@ public class RecyclerViewAdapterContact extends RecyclerView.Adapter<vn.icar.tax
     Context mContext;
     ArrayList<Contact> mData;
     Dialog mDialog;
-    private TextView dialog_tvName, dialog_tvPhone, dialog_Fname;
     String id, Name, Phone, Email, Address;
+    private TextView dialog_tvName, dialog_tvPhone, dialog_Fname;
+
     public RecyclerViewAdapterContact(Context mContext, ArrayList<Contact> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
 
+    public static boolean openGoogleMap(final Context context, double lat, double lng, String address) {
+
+        Toast.makeText(context, "đang dẫn đường đến " + address, Toast.LENGTH_SHORT).show();
+        final String addressMap = String.format("google.navigation:q=%s,%s", lat, lng);
+
+        Intent intent2 = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse(addressMap));
+        intent2.setPackage("com.google.android.apps.maps");
+        intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent2);
+        return true;
+
+    }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -51,9 +65,9 @@ public class RecyclerViewAdapterContact extends RecyclerView.Adapter<vn.icar.tax
         viewHolder.items_contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog_tvName = (TextView)mDialog.findViewById(R.id.dialog_tvName);
-                dialog_tvPhone = (TextView)mDialog.findViewById(R.id.dialog_tvPhone);
-                dialog_Fname = (TextView)mDialog.findViewById(R.id.dialog_Fname);
+                dialog_tvName = (TextView) mDialog.findViewById(R.id.dialog_tvName);
+                dialog_tvPhone = (TextView) mDialog.findViewById(R.id.dialog_tvPhone);
+                dialog_Fname = (TextView) mDialog.findViewById(R.id.dialog_Fname);
 //                ImageView dialog_contact_img = (ImageView) mDialog.findViewById(R.id.dialog_img);
                 id = mData.get(viewHolder.getAdapterPosition()).getId();
                 Name = mData.get(viewHolder.getAdapterPosition()).getName();
@@ -63,49 +77,57 @@ public class RecyclerViewAdapterContact extends RecyclerView.Adapter<vn.icar.tax
 
                 dialog_tvName.setText(mData.get(viewHolder.getAdapterPosition()).getName());
                 dialog_tvPhone.setText(mData.get(viewHolder.getAdapterPosition()).getPhone()
-                .equals("") ? "Chưa thêm số liên hệ" : mData.get(viewHolder.getAdapterPosition()).getPhone());
+                        .equals("") ? "Chưa thêm số liên hệ" : mData.get(viewHolder.getAdapterPosition()).getPhone());
                 dialog_Fname.setText(mData.get(viewHolder.getAdapterPosition()).getFname());
 //                dialog_contact_img.setImageResource(mData.get(viewHolder.getAdapterPosition()).getPhoto());
 //                Toast.makeText(mContext, "Test Click " + String.valueOf(viewHolder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
                 mDialog.show();
 
                 //Sự kiện click vào icon gọi để chuyển hướng cuộc gọi đến sđt đc chọn
-                ImageView call_button = (ImageView)mDialog.findViewById(R.id.call_button);
-                ImageView chat_button = (ImageView)mDialog.findViewById(R.id.chat_button);
-                ImageView info_button = (ImageView)mDialog.findViewById(R.id.info_button);
-                call_button.setOnClickListener(new View.OnClickListener(){
+                ImageView call_button = (ImageView) mDialog.findViewById(R.id.call_button);
+                ImageView chat_button = (ImageView) mDialog.findViewById(R.id.chat_button);
+                ImageView info_button = (ImageView) mDialog.findViewById(R.id.info_button);
+                ImageView  direct_button= (ImageView) mDialog.findViewById(R.id.direct_button);
+                call_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                    if (dialog_tvPhone.getText().toString().equals("Chưa thêm số liên hệ")){
-                        Toast.makeText(mContext, "Chưa thêm số liên hệ", Toast.LENGTH_SHORT).show();
-                    }else {
-                        mContext.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + dialog_tvPhone.getText().toString())));
-                    }
+                        if (dialog_tvPhone.getText().toString().equals("Chưa thêm số liên hệ")) {
+                            Toast.makeText(mContext, "Chưa thêm số liên hệ", Toast.LENGTH_SHORT).show();
+                        } else {
+                            mContext.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + dialog_tvPhone.getText().toString())));
+                        }
                     }
                 });
                 //click vào icon sms để vào ô chat với sđt đó
-                chat_button.setOnClickListener(new View.OnClickListener(){
+                chat_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                    if (dialog_tvPhone.getText().toString().equals("Chưa thêm số liên hệ")){
-                        Toast.makeText(mContext, "Chưa thêm số liên hệ", Toast.LENGTH_SHORT).show();
-                    }else {
-                        mContext.startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+ dialog_tvPhone.getText().toString())));
-                    }
+                        if (dialog_tvPhone.getText().toString().equals("Chưa thêm số liên hệ")) {
+                            Toast.makeText(mContext, "Chưa thêm số liên hệ", Toast.LENGTH_SHORT).show();
+                        } else {
+                            mContext.startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + dialog_tvPhone.getText().toString())));
+                        }
                     }
                 });
                 //Click vào để xem và thay đổi info contact
                 info_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                    Intent intent = new Intent(mContext, ContactDetailActivity.class);
-                    intent.putExtra("MESSAGE", "SEE_DETAIL");
-                    intent.putExtra("ID", id);
-                    intent.putExtra("NAME", Name);
-                    intent.putExtra("PHONE", Phone);
-                    intent.putExtra("EMAIL", Email);
-                    intent.putExtra("ADDRESS", Address);
-                    mContext.startActivity(intent);
+                        Intent intent = new Intent(mContext, ContactDetailActivity.class);
+                        intent.putExtra("MESSAGE", "SEE_DETAIL");
+                        intent.putExtra("ID", id);
+                        intent.putExtra("NAME", Name);
+                        intent.putExtra("PHONE", Phone);
+                        intent.putExtra("EMAIL", Email);
+                        intent.putExtra("ADDRESS", Address);
+                        mContext.startActivity(intent);
+                    }
+                });
+                // click vào để dẫn đường đến địa chỉ cần đến
+                direct_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openGoogleMap(mContext,20.99337528006226, 105.78797768673181,"Công ty Hoa");
                     }
                 });
             }
@@ -122,7 +144,7 @@ public class RecyclerViewAdapterContact extends RecyclerView.Adapter<vn.icar.tax
                             public void onClick(DialogInterface dialog, int which) {
                                 removeAtDB(mData.get(viewHolder.getAdapterPosition()).getId());
                                 removeAt(viewHolder.getAdapterPosition());
-                                if(mData.size() == 0){
+                                if (mData.size() == 0) {
                                     Toast.makeText(mContext, "Danh sách danh bạ rỗng", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -133,6 +155,15 @@ public class RecyclerViewAdapterContact extends RecyclerView.Adapter<vn.icar.tax
                 return false;
             }
         });
+        //click dẫn đường
+        viewHolder.btn_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGoogleMap(mContext,20.99337528006226, 105.78797768673181,"Công ty Hoa");
+
+
+            }
+        });
         return viewHolder;
     }
 
@@ -141,14 +172,15 @@ public class RecyclerViewAdapterContact extends RecyclerView.Adapter<vn.icar.tax
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mData.size());
     }
-    public void removeAtDB(String ID){
-        ArrayList <ContentProviderOperation> ops = new ArrayList < ContentProviderOperation > ();
+
+    public void removeAtDB(String ID) {
+        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
         ops.add(ContentProviderOperation
                 .newDelete(ContactsContract.RawContacts.CONTENT_URI)
                 .withSelection(
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID
                                 + " = ?",
-                        new String[] { ID })
+                        new String[]{ID})
                 .build());
         try {
             mContext.getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
@@ -157,9 +189,10 @@ public class RecyclerViewAdapterContact extends RecyclerView.Adapter<vn.icar.tax
             Toast.makeText(mContext, "Lỗi " + e, Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int position) {
-        if(position != 0) {
+        if (position != 0) {
             Contact currentContact = mData.get(position);
             Contact prevContact = mData.get(position - 1);
             if (!currentContact.getFname().equals(prevContact.getFname())) {
@@ -167,13 +200,12 @@ public class RecyclerViewAdapterContact extends RecyclerView.Adapter<vn.icar.tax
                 myViewHolder.pst_tv.setText(mData.get(position).getFname());
                 myViewHolder.tvName.setText(mData.get(position).getName());
                 myViewHolder.tvFname.setText(mData.get(position).getFname());
-            }
-            else {
+            } else {
                 myViewHolder.ln_cover.setVisibility(View.GONE);
                 myViewHolder.tvName.setText(mData.get(position).getName());
                 myViewHolder.tvFname.setText(mData.get(position).getFname());
             }
-        }else {
+        } else {
             myViewHolder.ln_cover.setVisibility(View.VISIBLE);
             myViewHolder.pst_tv.setText(mData.get(position).getFname());
             myViewHolder.tvName.setText(mData.get(position).getName());
@@ -185,26 +217,28 @@ public class RecyclerViewAdapterContact extends RecyclerView.Adapter<vn.icar.tax
     public int getItemCount() {
         return mData.size();
     }
-    public void updateList(ArrayList<Contact> lstNew){
+
+    public void updateList(ArrayList<Contact> lstNew) {
         mData = lstNew;
         notifyDataSetChanged();
     }
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout items_contact;
         private LinearLayout ln_cover;
         private TextView tvName;
         private TextView tvFname;
         private TextView pst_tv;
-        private ImageView img;
+        private ImageView btn_address;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             items_contact = (LinearLayout) itemView.findViewById(R.id.contact_items_id);
             ln_cover = (LinearLayout) itemView.findViewById(R.id.ln_cover);
-            tvName = (TextView)itemView.findViewById(R.id.tvName);
-            tvFname = (TextView)itemView.findViewById(R.id.tvFname);
-            pst_tv = (TextView)itemView.findViewById(R.id.pst_tv);
-            img = (ImageView)itemView.findViewById(R.id.img_contact);
+            tvName = (TextView) itemView.findViewById(R.id.tvName);
+            tvFname = (TextView) itemView.findViewById(R.id.tvFname);
+            pst_tv = (TextView) itemView.findViewById(R.id.pst_tv);
+            btn_address = (ImageView) itemView.findViewById(R.id.btn_address);
         }
     }
 }
