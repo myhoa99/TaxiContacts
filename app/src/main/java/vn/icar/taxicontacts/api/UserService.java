@@ -20,6 +20,6 @@ public interface UserService {
     @POST("register?")
     Call<RegisterResponse> register(@Field("_id") String _id, @Field("password") String password, @Field("name") String name);
     @GET("updateContac?")
-    Call<PushContacts> getAllData(@Query("statusCode") String status, @Header("Authorization") String token);
+    Call<PushContacts> UpdateContacts(@Query("statusCode") String status, @Header("Authorization") String token);
 
 }

@@ -19,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 
 public class NewContactActivity extends AppCompatActivity {
+    public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";
     private TextInputLayout edtName, edtPhone, edtEmail, edtAddress;
     private ImageButton btnBack;
     private TextView tvAdd, tvToolbarTitle;
@@ -40,8 +41,6 @@ public class NewContactActivity extends AppCompatActivity {
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         tvAdd = (TextView) findViewById(R.id.tvAdd);
         tvToolbarTitle = (TextView) findViewById(R.id.tvToolbarTitle);
-
-        //Nhận dữ liệu intent được gửi xem rằng là sửa hay là thêm
         message = getIntent().getExtras().getString("MESSAGE");
         if (message.equals("ADD_CONTACT")) {
             tvToolbarTitle.setText("Thêm danh bạ");

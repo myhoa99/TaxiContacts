@@ -12,6 +12,9 @@
     <item
         android:title="Về chúng tôi"
         android:id="@+id/item_about"/>
+    <item
+        android:title="Đăng xuất"
+        android:id="@+id/item_log_out"/>
     <!--<item-->
         <!--android:iconTint="#B3B3B3"-->
         <!--android:id="@+id/search_voice_btn"-->

@@ -26,6 +26,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,14 +42,19 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import vn.icar.taxicontacts.adapter.ViewPagerAdapter;
+import vn.icar.taxicontacts.db.Contacts;
+import vn.icar.taxicontacts.db.ContactsListAdapter;
+import vn.icar.taxicontacts.db.ContactsViewModel;
 import vn.icar.taxicontacts.fragment.CallFragment;
 import vn.icar.taxicontacts.fragment.ContactFragment;
 
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_SPEECH_INPUT = 1000;
+    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
@@ -56,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvSearch;
     ImageView img_voice_search, ic_scanqr, img_qrcode;
     private FloatingActionButton fab;
-
+    private ContactsViewModel mContactsViewModel;
     private Dialog dialog_share;
 
     Uri ringtone;
@@ -105,7 +111,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
             }
+        });
+        //room
+        final ContactsListAdapter adapter = new ContactsListAdapter(new ContactsListAdapter.WordDiff());
+        mContactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
+        mContactsViewModel.getAllData().observe(this, (List<Contacts> words) -> {
+
+            adapter.submitList(words);
         });
 
         //Speech to Text
@@ -126,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         // quet QRCode
         ic_scanqr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,6 +212,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            case NEW_WORD_ACTIVITY_REQUEST_CODE:{
+                if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+                    Contacts contacts = new Contacts(data.getStringExtra(NewContactActivity.EXTRA_REPLY));
+                    mContactsViewModel.insert(contacts);
+                } else {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Danh bạ không lưu được",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
             break;
         }
     }
@@ -259,6 +285,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Lỗi" + ex, Toast.LENGTH_SHORT).show();
                 }
                 return true;
+            case R.id.item_log_out:
+                startActivity( new Intent(vn.icar.taxicontacts.MainActivity.this,IntroActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }

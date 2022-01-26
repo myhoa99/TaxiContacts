@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,7 +21,7 @@ import vn.icar.taxicontacts.api.UserService;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username, password;
-    Button btnlogin;
+    FloatingActionButton btnlogin;
     TextView tvforgetpass, tvsignin;
 
     @Override
