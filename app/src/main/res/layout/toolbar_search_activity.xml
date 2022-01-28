@@ -4,7 +4,7 @@
     android:minHeight="?attr/actionBarSize"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/holo_orange_dark"
+    android:background="@color/colorhoa"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:src="@drawable/ic_backspace"
             android:layout_gravity="left"
+            android:tint="@color/colorHintTextLight"
             android:id="@+id/btn_Back" />
         <EditText
             android:background="@null"
@@ -26,6 +27,7 @@
             android:layout_height="35dp" />
         <ImageButton
             android:padding="10dp"
+            android:tint="@color/colorHintTextLight"
             android:background="?selectableItemBackgroundBorderless"
             android:layout_marginRight="15dp"
             android:layout_height="wrap_content"

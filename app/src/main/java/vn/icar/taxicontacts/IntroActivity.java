@@ -40,7 +40,7 @@ public class IntroActivity extends AppCompatActivity {
                         startActivity(new Intent(vn.icar.taxicontacts.IntroActivity.this, LoginActivity.class));
                         finish();
                     }
-                }, 150);
+                }, 0);
             } else {
                 Toast.makeText(this, "Bạn đã từ chối quyền", Toast.LENGTH_SHORT).show();
                 finish();
@@ -81,7 +81,7 @@ public class IntroActivity extends AppCompatActivity {
                     startActivity(new Intent(vn.icar.taxicontacts.IntroActivity.this, LoginActivity.class));
                     finish();
                 }
-            }, 150);
+            }, 0);
         }
     }
 }

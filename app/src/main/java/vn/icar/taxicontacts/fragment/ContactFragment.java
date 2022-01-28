@@ -124,7 +124,7 @@ public class ContactFragment extends Fragment {
         Cursor cursor = resolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
         cursor.moveToLast();
 
-        @SuppressLint("Range") String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+        String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
         //Get max ID in lstContact List to Compare
         int max = Integer.parseInt(lstContact.get(0).getId());
         for (int i = 1;i<lstContact.size()-1;i++){
@@ -135,7 +135,7 @@ public class ContactFragment extends Fragment {
 
         if(Integer.parseInt(id) == max){
         } else if(Integer.parseInt(id) > max) {
-            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+             String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
             List<String> lstPhoneNumber = new ArrayList<>();
             List<String> lstEmail = new ArrayList<>();
@@ -146,7 +146,7 @@ public class ContactFragment extends Fragment {
                     , new String[]{id}, null);
 
             while (phoneCursor.moveToNext() && phoneCursor != null){
-                @SuppressLint("Range") String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+             String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                 lstPhoneNumber.add(phoneNumber);
             }
             phoneCursor.close();
@@ -156,7 +156,7 @@ public class ContactFragment extends Fragment {
                     , null, ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?"
                     , new String[]{id}, null);
             while (emailCursor.moveToNext() && emailCursor != null){
-                @SuppressLint("Range") String email = emailCursor.getString(emailCursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+            String email = emailCursor.getString(emailCursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
                 lstEmail.add(email);
             }
             emailCursor.close();

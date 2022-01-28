@@ -26,5 +26,6 @@ public class ContactsViewModel extends AndroidViewModel {
 
     public void insert(Contacts contacts) {
         mRepository.insert(contacts);
+
     }
 }

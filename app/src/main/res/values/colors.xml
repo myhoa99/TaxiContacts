@@ -6,9 +6,10 @@
     <color name="backgroundFragment">#202125</color>
     <color name="colorTextLight">#52B0D4</color>
     <color name="colorTextLightLow">#506B77</color>
-    <color name="colorHintTextLight">#909092</color>
+    <color name="colorHintTextLight">#656566</color>
     <color name="white">#ffffff</color>
     <color name="red">#FF0000</color>
     <color name="colorIcon">#52A1FA</color>
     <color name="black">#000000</color>
+    <color name="colorhoa">#D3963C</color>
 </resources>

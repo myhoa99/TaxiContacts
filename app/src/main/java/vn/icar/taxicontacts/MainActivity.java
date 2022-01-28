@@ -138,8 +138,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, NewContactActivity.class);
                 intent.putExtra("MESSAGE", "ADD_CONTACT");
                 startActivity(intent);
+                update();
             }
         });
+
 
         // quet QRCode
         ic_scanqr.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
                 integrator.setPrompt("Scan danh bạ");
             }
         });
+    }
+
+    private void update() {
+
     }
 
 

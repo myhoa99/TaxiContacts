@@ -71,10 +71,10 @@ public class CallFragment extends Fragment {
         Date date;
 
         while(cursorLog.moveToNext()){
-            @SuppressLint("Range") String id = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls._ID));
-            @SuppressLint("Range") String name = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.CACHED_NAME)) == null ? "" : cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.CACHED_NAME));
-            @SuppressLint("Range") String phoneNumber = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.NUMBER));
-            @SuppressLint("Range") String duration = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.DURATION));
+             String id = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls._ID));
+             String name = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.CACHED_NAME)) == null ? "" : cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.CACHED_NAME));
+             String phoneNumber = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.NUMBER));
+             String duration = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.DURATION));
             int time = Integer.parseInt(duration);
 
             date = new Date(Long.valueOf(cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.DATE))));
@@ -118,6 +118,7 @@ public class CallFragment extends Fragment {
         adapter.uploadCallsLog(newCall());
     }
 
+
     @SuppressLint("Range")
     public  List<Calls> newCall(){
         ContentResolver resolver = getActivity().getContentResolver();
@@ -138,8 +139,8 @@ public class CallFragment extends Fragment {
             Date date;
 
             @SuppressLint("Range") String name = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.CACHED_NAME));
-            @SuppressLint("Range") String phoneNumber = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.NUMBER));
-            @SuppressLint("Range") String duration = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.DURATION));
+             @SuppressLint("Range") String phoneNumber = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.NUMBER));
+           @SuppressLint("Range") String duration = cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.DURATION));
             int time = Integer.parseInt(duration);
 
             date = new Date(Long.valueOf(cursorLog.getString(cursorLog.getColumnIndex(CallLog.Calls.DATE))));
